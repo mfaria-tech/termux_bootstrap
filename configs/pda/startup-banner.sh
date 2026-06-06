@@ -119,6 +119,11 @@ pda_get_ip() {
   local ip_addr=""
   if pda_cmd ip; then
     ip_addr="$(ip -o -4 addr show scope global 2>/dev/null | awk '{split($4,a,"/"); print a[1]; exit}')"
+  else if pda_cmd ifconfig; then
+    ip_addr="$(
+      ifconfig 2>/dev/null |
+      awk '/inet / && $2 != "127.0.0.1" { print $2; exit }'
+    )"
   fi
   [[ -n "$ip_addr" ]] && printf "%s" "$ip_addr" || printf "offline"
 }
@@ -318,11 +323,11 @@ print_system_info() {
   pda_box_line "${PDA_ICON_CLOCK:-🕒} Hora:" "${PDA_WHITE}$now_time | sessao $session_uptime${PDA_RESET}"
   pda_box_line "${PDA_ICON_PHONE:-📱} Device:" "${PDA_WHITE}$(pda_get_model) | $(pda_get_android_version)${PDA_RESET}"
   pda_box_line "${PDA_ICON_NET:-📡} IP local:" "${PDA_WHITE}$(pda_get_ip)${PDA_RESET}"
-  pda_box_line "Shell:" "${PDA_WHITE}$(pda_get_shell)${PDA_RESET}"
+  pda_box_line "${PDA_ICON_SHELL:-🐚} Shell:" "${PDA_WHITE}$(pda_get_shell)${PDA_RESET}"
   pda_box_line "${PDA_ICON_PYTHON:-🐍} Python:" "${PDA_WHITE}$(pda_get_python)${PDA_RESET}"
   pda_box_line "${PDA_ICON_NODE:-🟢} Node:" "${PDA_WHITE}$(pda_get_node)${PDA_RESET}"
   print_storage
-  print_battery
+  #print_battery
   pda_box_line "${PDA_ICON_MOON:-🌙} Moon:" "${PDA_WHITE}$(pda_moon_phase)${PDA_RESET}"
   pda_box_line "${PDA_ICON_TASK:-☑️} Tasks:" "${PDA_WHITE}$(pda_pending_tasks) pending${PDA_RESET}"
   pda_box_line "${PDA_ICON_POMO:-🍅} Pomodoros:" "${PDA_WHITE}$(pda_pomodoros_today) today${PDA_RESET}"
