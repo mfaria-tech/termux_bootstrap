@@ -223,7 +223,7 @@ pda_moon_phase() {
     mm=$(( mm + 12 ))
   fi
   k=$(( yy / 100 ))
-  phase=$(( (((((yy % 100) * 5) / 4) + (((mm + 1) * 13) / 5) + day - k + (k / 4) + 15) % 30 ))
+  phase=$(( (((((yy % 100) * 5) / 4) + (((mm + 1) * 13) / 5) + day - k + (k / 4) + 15) % 30 )))
   index=$(( phase / 4 ))
   case "$index" in
     0) printf "new moon" ;;
