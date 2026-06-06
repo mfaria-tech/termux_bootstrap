@@ -60,17 +60,32 @@ configure_default_shell() {
   local zsh_path
   zsh_path="$(command -v zsh)"
 
-  if [[ "${SHELL:-}" == "$zsh_path" ]]; then
-    log_success "ZSH já e o shell atual."
-    return 0
-  fi
-
   if command_exists chsh; then
     log_info "Definindo ZSH como shell padrão."
     chsh -s "$zsh_path" || log_warning "Não foi possível alterar o shell automaticamente."
   else
     log_warning "chsh não encontrado. Abra o ZSH executando: zsh"
   fi
+
+  if [[ -z "$zsh_path" ]]; then
+    log_error "ZSH não encontrado."
+    return 1
+  fi
+
+  mkdir -p "$HOME/.termux"
+
+  echo "$zsh_path" > "$HOME/.termux/shell"
+
+  log_success "ZSH definido como shell padrão do Termux."
+
+  if [[ "${SHELL:-}" != "$zsh_path" ]]; then
+    export SHELL="$zsh_path"
+  else
+    log_success "ZSH já e o shell atual."
+    return 0
+  fi
+
+  log_info "Reinicie o Termux para aplicar a alteração."
 }
 
 main() {
