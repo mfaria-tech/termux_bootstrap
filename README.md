@@ -1,21 +1,20 @@
 # termux-bootstrap
 
-Instalador modular para automatizar a configuracao inicial de um ambiente Termux no Android. O projeto foi pensado para ser simples de auditar, facil de personalizar e seguro para executar mais de uma vez.
+Instalador básico para automatizar a configuração inicial de um ambiente Termux no Android.
 
 ## Recursos
 
-- Atualizacao do sistema com `pkg update` e `pkg upgrade`.
-- Instalacao idempotente de pacotes definidos em `packages.conf`.
+- Atualização do sistema com `pkg update` e `pkg upgrade`.
+- Instalação de pacotes definidos em `packages.conf`.
 - Fluxo opcional para aplicativos PDA configurados em `apps/apps.json`.
-- Customizacoes opcionais para ZSH, Oh My Zsh, Powerlevel10k, Neovim, Nerd Fonts e LunarVim.
-- Logs coloridos para informacao, sucesso, aviso e erro.
-- Funcoes reutilizaveis em `scripts/utils.sh`.
+- Customizações opcionais para ZSH, Oh My Zsh, Powerlevel10k, Neovim, Nerd Fonts e LunarVim.
+- Logs para informação, sucesso, aviso e erro.
+- Funções reutilizáveis em `scripts/utils.sh`.
 
 ## Requisitos
 
 - Android com Termux instalado.
-- Conexao com a internet.
-- Permissao de armazenamento configurada se voce pretende trabalhar com arquivos fora do `$HOME` do Termux.
+- Permissão de armazenamento configurada se você pretende trabalhar com arquivos fora do `$HOME` do Termux.
 
 Opcionalmente, execute:
 
@@ -23,9 +22,9 @@ Opcionalmente, execute:
 termux-setup-storage
 ```
 
-## Instalacao
+## Instalação
 
-Clone o repositorio e execute o instalador:
+Clone o repositório e execute o instalador:
 
 ```bash
 git clone https://github.com/seu-usuario/termux-bootstrap.git
@@ -34,7 +33,7 @@ chmod +x install.sh scripts/*.sh
 ./install.sh
 ```
 
-Tambem e possivel executar etapas especificas:
+Também é possível executar etapas específicas:
 
 ```bash
 bash scripts/update.sh
@@ -44,7 +43,7 @@ bash scripts/nvim.sh
 bash scripts/fonts.sh
 ```
 
-## Estrutura de diretorios
+## Estrutura de diretórios
 
 ```text
 termux-bootstrap/
@@ -70,9 +69,9 @@ termux-bootstrap/
     +-- apps.json
 ```
 
-## Personalizacao de pacotes
+## Personalização de pacotes
 
-Edite `packages.conf` para adicionar ou remover pacotes. Cada linha representa um pacote do Termux. Linhas vazias e comentarios iniciados com `#` sao ignorados.
+Edite `packages.conf` para adicionar ou remover pacotes. Cada linha representa um pacote do Termux. Linhas vazias e comentários iniciados com `#` são ignorados.
 
 Exemplo:
 
@@ -82,11 +81,11 @@ neovim
 python
 ```
 
-O instalador verifica cada pacote com `dpkg -s` antes de instalar, evitando reinstalacoes desnecessarias.
+O instalador verifica cada pacote com `dpkg -s` antes de instalar, evitando reinstalações desnecessárias.
 
 ## Aplicativos PDA
 
-A etapa PDA e opcional. Para usa-la, defina a URL do repositorio antes de rodar o instalador:
+A etapa PDA é opcional. Para usá-la, defina a URL do repositório antes de rodar o instalador:
 
 ```bash
 export PDA_REPO_URL="https://github.com/seu-usuario/seu-repositorio-pda.git"
@@ -94,7 +93,7 @@ export PDA_DIR="$HOME/pda-apps"
 ./install.sh
 ```
 
-Voce tambem pode configurar diretamente em `apps/apps.json`:
+Você também pode configurar diretamente em `apps/apps.json`:
 
 ```json
 {
@@ -105,7 +104,7 @@ Voce tambem pode configurar diretamente em `apps/apps.json`:
 }
 ```
 
-O arquivo `apps/apps.json` controla quais aplicativos serao instalados:
+O arquivo `apps/apps.json` controla quais aplicativos serão instalados:
 
 ```json
 {
@@ -125,51 +124,51 @@ Campos:
 
 - `name`: nome exibido nos logs.
 - `enabled`: use `false` para manter o app registrado sem instalar.
-- `check_command`: comando usado para detectar se o app ja esta instalado.
-- `working_dir`: diretorio onde o comando sera executado.
-- `install`: comando de instalacao.
+- `check_command`: comando usado para detectar se o app já está instalado.
+- `working_dir`: diretório onde o comando será executado.
+- `install`: comando de instalação.
 
-## Customizacoes visuais
+## Customizações visuais
 
 Ao confirmar a etapa visual, o instalador executa:
 
-- instalacao do Oh My Zsh;
-- instalacao do tema Powerlevel10k;
-- instalacao dos plugins `zsh-autosuggestions` e `zsh-syntax-highlighting`;
-- aplicacao de `.zshrc` e `.p10k.zsh`;
-- configuracao inicial do Neovim;
-- instalacao opcional de Meslo Nerd Font e Fira Code Nerd Font;
-- instalacao opcional do LunarVim.
+- instalação do Oh My Zsh;
+- instalação do tema Powerlevel10k;
+- instalação dos plugins `zsh-autosuggestions` e `zsh-syntax-highlighting`;
+- aplicação de `.zshrc` e `.p10k.zsh`;
+- configuração inicial do Neovim;
+- instalação opcional de Meslo Nerd Font e Fira Code Nerd Font;
+- instalação opcional do LunarVim.
 
 ## Neovim
 
-A configuracao em `configs/nvim/init.lua` habilita:
+A configuração em `configs/nvim/init.lua` habilita:
 
-- numeros de linha;
-- numeros relativos;
-- indentacao com 4 espacos;
+- números de linha;
+- números relativos;
+- indentação com 4 espaços;
 - cores true color;
 - clipboard;
 - leader key com espaco;
-- atalhos basicos para salvar, sair, limpar busca e abrir explorador.
+- atalhos básicos para salvar, sair, limpar busca e abrir explorador.
 
 ## LunarVim
 
-O LunarVim so e oferecido quando o Neovim esta instalado. Se `lvim` ja existir no sistema, a instalacao e ignorada.
+O LunarVim só é oferecido quando o Neovim está instalado. Se `lvim` já existir no sistema, a instalação é ignorada.
 
-## Solucao de problemas
+## Solução de problemas
 
-### `pkg` nao encontrado
+### `pkg` não encontrado
 
 Execute o projeto dentro do Termux. O instalador depende do gerenciador de pacotes do Termux.
 
-### Fonte nao mudou
+### Fonte não mudou
 
-Reinicie o Termux. Em alguns dispositivos, `termux-reload-settings` pode nao estar disponivel ou nao recarregar a fonte imediatamente.
+Reinicie o Termux. Em alguns dispositivos, `termux-reload-settings` pode não estar disponível ou não recarregar a fonte imediatamente.
 
 ### Erro ao instalar pacote
 
-Atualize os repositorios e rode novamente:
+Atualize os repositórios e rode novamente:
 
 ```bash
 pkg update -y
@@ -177,9 +176,9 @@ pkg upgrade -y
 ./install.sh
 ```
 
-### PDA_REPO_URL nao definido
+### PDA_REPO_URL não definido
 
-Defina a variavel antes de confirmar a etapa PDA:
+Defina a variável antes de confirmar a etapa PDA:
 
 ```bash
 export PDA_REPO_URL="https://github.com/seu-usuario/seu-repositorio-pda.git"
@@ -187,18 +186,18 @@ export PDA_REPO_URL="https://github.com/seu-usuario/seu-repositorio-pda.git"
 
 ### Clipboard no Neovim
 
-O suporte a clipboard no Termux pode exigir pacotes adicionais ou integracao com o app Termux:API, dependendo do dispositivo.
+O suporte a clipboard no Termux pode exigir pacotes adicionais ou integração com o app Termux:API, dependendo do dispositivo.
 
 ## Roadmap
 
-- Perfil de instalacao minimo, padrao e completo.
-- Backup automatico antes de sobrescrever configuracoes.
+- Perfil de instalação mínimo, padrão e completo.
+- Backup automático antes de sobrescrever configurações.
 - Suporte a dry-run.
-- Instalacao opcional de linguagens extras.
-- Validacao JSON mais detalhada para `apps/apps.json`.
+- Instalação opcional de linguagens extras.
+- Validação JSON mais detalhada para `apps/apps.json`.
 - Testes automatizados com ShellCheck e bats.
 
-## Publicacao no GitHub
+## Publicação no GitHub
 
 Antes de publicar:
 
@@ -210,4 +209,4 @@ git add .
 git commit -m "Initial termux bootstrap"
 ```
 
-O projeto esta organizado para ser usado diretamente como repositorio GitHub.
+O projeto está organizado para ser usado diretamente como repositório GitHub.
