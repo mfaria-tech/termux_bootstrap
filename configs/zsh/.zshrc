@@ -13,6 +13,7 @@ plugins=(
 source "$ZSH/oh-my-zsh.sh"
 
 [[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
+[[ -f "$HOME/.config/pda/startup-banner.sh" ]] && source "$HOME/.config/pda/startup-banner.sh"
 
 export EDITOR="nvim"
 export VISUAL="nvim"

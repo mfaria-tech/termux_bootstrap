@@ -183,3 +183,43 @@ Defina a variável antes de confirmar a etapa PDA:
 ```bash
 export PDA_REPO_URL="https://github.com/seu-usuario/seu-repositorio-pda.git"
 ```
+
+## PDA Boot Screen
+
+O projeto inclui um banner de inicializacao para Termux chamado `PDA Boot Screen`.
+Durante a etapa visual, os arquivos sao instalados em `~/.config/pda`:
+
+```text
+~/.config/pda/
++-- startup-banner.sh
++-- cute_messages.txt
++-- theme.sh
++-- ascii/
+    +-- logo.txt
+    +-- mascot.txt
+```
+
+O `.zshrc` gerado pelo projeto carrega automaticamente:
+
+```bash
+source ~/.config/pda/startup-banner.sh
+```
+
+O banner exibe dados coletados localmente: data, hora, sessao, IP local,
+modelo do aparelho, versao Android, shell, Python, Node, armazenamento,
+memoria, bateria, temperatura, fase da lua, tarefas e pomodoros.
+
+Para desativar temporariamente:
+
+```bash
+export PDA_BOOT_SCREEN=0
+```
+
+Personalizacao rapida:
+
+- edite mensagens em `~/.config/pda/cute_messages.txt`;
+- edite cores em `~/.config/pda/theme.sh`;
+- edite o logo em `~/.config/pda/ascii/logo.txt`;
+- registre tarefas em `~/.config/pda/tasks.txt`;
+- registre pomodoros em `~/.config/pda/pomodoros.log`;
+- para clima, defina `PDA_ENABLE_WEATHER=1` e `PDA_WEATHER_CMD`.

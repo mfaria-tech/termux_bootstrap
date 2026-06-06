@@ -56,6 +56,17 @@ configure_zsh_files() {
   copy_file_if_changed "$BOOTSTRAP_DIR/configs/zsh/.p10k.zsh" "$HOME/.p10k.zsh"
 }
 
+configure_pda_boot_screen() {
+  local pda_target="$HOME/.config/pda"
+
+  ensure_directory "$pda_target/ascii"
+  copy_file_if_changed "$BOOTSTRAP_DIR/configs/pda/startup-banner.sh" "$pda_target/startup-banner.sh"
+  copy_file_if_changed "$BOOTSTRAP_DIR/configs/pda/cute_messages.txt" "$pda_target/cute_messages.txt"
+  copy_file_if_changed "$BOOTSTRAP_DIR/configs/pda/theme.sh" "$pda_target/theme.sh"
+  copy_file_if_changed "$BOOTSTRAP_DIR/configs/pda/ascii/logo.txt" "$pda_target/ascii/logo.txt"
+  copy_file_if_changed "$BOOTSTRAP_DIR/configs/pda/ascii/mascot.txt" "$pda_target/ascii/mascot.txt"
+}
+
 configure_default_shell() {
   local zsh_path
   zsh_path="$(command -v zsh)"
@@ -83,6 +94,7 @@ main() {
   install_powerlevel10k
   install_zsh_plugin "zsh-autosuggestions" "https://github.com/zsh-users/zsh-autosuggestions.git"
   install_zsh_plugin "zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+  configure_pda_boot_screen
   configure_zsh_files
   configure_default_shell
 }
