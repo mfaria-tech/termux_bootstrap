@@ -1,0 +1,16 @@
+{
+  "repository": {
+    "url": "",
+    "target_dir": "$HOME/pda-apps",
+    "description": "Defina repository.url ou a variavel PDA_REPO_URL para clonar ou atualizar seu repositorio de aplicativos PDA."
+  },
+  "apps": [
+    {
+      "name": "example-app",
+      "enabled": false,
+      "check_command": "example-app",
+      "working_dir": "$PDA_DIR/example-app",
+      "install": "bash install.sh"
+    }
+  ]
+}
