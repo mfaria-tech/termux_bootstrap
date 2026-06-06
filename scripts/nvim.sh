@@ -18,12 +18,12 @@ configure_neovim() {
 }
 
 install_lunarvim() {
-  command_exists nvim || die "Neovim nao esta instalado corretamente."
+  command_exists nvim || die "Neovim não está instalado corretamente."
   command_exists git || install_package git
   command_exists curl || install_package curl
 
   if command_exists lvim; then
-    log_success "LunarVim ja instalado."
+    log_success "LunarVim já instalado."
     return 0
   fi
 
@@ -32,7 +32,7 @@ install_lunarvim() {
     bash <(curl -fsSL "$LVIM_INSTALL_URL")
     log_success "LunarVim instalado."
   else
-    log_warning "Instalacao do LunarVim ignorada."
+    log_warning "Instalação do LunarVim ignorada."
   fi
 }
 

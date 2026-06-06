@@ -10,12 +10,12 @@ source "$BOOTSTRAP_DIR/scripts/utils.sh"
 main() {
   require_termux
 
-  log_info "Aplicando configuracoes visuais."
+  log_info "Aplicando configurações visuais."
   bash "$BOOTSTRAP_DIR/scripts/zsh.sh"
   bash "$BOOTSTRAP_DIR/scripts/nvim.sh"
   bash "$BOOTSTRAP_DIR/scripts/fonts.sh"
 
-  log_success "Customizacoes visuais aplicadas."
+  log_success "Customizações visuais aplicadas."
 }
 
 main "$@"

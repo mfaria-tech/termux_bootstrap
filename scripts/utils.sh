@@ -42,7 +42,7 @@ require_termux() {
     log_warning "Este instalador foi projetado para Termux. Continuando mesmo assim."
   fi
 
-  command_exists pkg || die "Comando 'pkg' nao encontrado. Execute dentro do Termux."
+  command_exists pkg || die "Comando 'pkg' não encontrado. Execute dentro do Termux."
 }
 
 ask_yes_no() {
@@ -54,7 +54,7 @@ ask_yes_no() {
   case "$default" in
     y|Y) suffix="[S/n]" ;;
     n|N) suffix="[s/N]" ;;
-    *) die "Valor padrao invalido para ask_yes_no: $default" ;;
+    *) die "Valor padrão inválido para ask_yes_no: $default" ;;
   esac
 
   while true; do
@@ -63,8 +63,8 @@ ask_yes_no() {
 
     case "$answer" in
       s|S|sim|SIM|y|Y|yes|YES) return 0 ;;
-      n|N|nao|NAO|no|NO) return 1 ;;
-      *) log_warning "Responda com sim ou nao." ;;
+      n|N|nao|não|NAO|NÃO|no|NO) return 1 ;;
+      *) log_warning "Responda com sim ou não." ;;
     esac
   done
 }
@@ -85,7 +85,7 @@ install_package() {
   local package="$1"
 
   if check_package "$package"; then
-    log_success "Pacote ja instalado: $package"
+    log_success "Pacote já instalado: $package"
     return 0
   fi
 
@@ -106,10 +106,10 @@ copy_file_if_changed() {
   ensure_directory "$(dirname "$target_file")"
 
   if [[ -f "$target_file" ]] && cmp -s "$source_file" "$target_file"; then
-    log_success "Configuracao ja atualizada: $target_file"
+    log_success "Configuração já atualizada: $target_file"
     return 0
   fi
 
   cp "$source_file" "$target_file"
-  log_success "Configuracao aplicada: $target_file"
+  log_success "Configuração aplicada: $target_file"
 }

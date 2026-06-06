@@ -10,7 +10,7 @@ source "$BOOTSTRAP_DIR/scripts/utils.sh"
 main() {
   require_termux
 
-  log_info "Atualizando indices de pacotes."
+  log_info "Atualizando índices de pacotes."
   pkg update -y
 
   log_info "Atualizando pacotes instalados."

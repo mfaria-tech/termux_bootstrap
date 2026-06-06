@@ -8,7 +8,7 @@ BOOTSTRAP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$BOOTSTRAP_DIR/scripts/utils.sh"
 
 main() {
-  log_info "Iniciando configuracao do Termux Bootstrap."
+  log_info "Iniciando configuração do Termux Bootstrap."
   require_termux
 
   bash "$BOOTSTRAP_DIR/scripts/update.sh"
@@ -17,13 +17,13 @@ main() {
   if ask_yes_no "Deseja instalar aplicativos PDA?" "n"; then
     bash "$BOOTSTRAP_DIR/scripts/pda.sh"
   else
-    log_warning "Instalacao de aplicativos PDA ignorada."
+    log_warning "Instalação de aplicativos PDA ignorada."
   fi
 
-  if ask_yes_no "Deseja aplicar customizacoes visuais?" "n"; then
+  if ask_yes_no "Deseja aplicar customizações visuais?" "n"; then
     bash "$BOOTSTRAP_DIR/scripts/visual.sh"
   else
-    log_warning "Customizacoes visuais ignoradas."
+    log_warning "Customizações visuais ignoradas."
   fi
 
   log_success "Termux Bootstrap finalizado com sucesso."

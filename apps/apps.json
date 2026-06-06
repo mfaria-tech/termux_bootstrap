@@ -2,7 +2,7 @@
   "repository": {
     "url": "",
     "target_dir": "$HOME/pda-apps",
-    "description": "Defina repository.url ou a variavel PDA_REPO_URL para clonar ou atualizar seu repositorio de aplicativos PDA."
+    "description": "Defina repository.url ou a variável PDA_REPO_URL para clonar ou atualizar seu repositório de aplicativos PDA."
   },
   "apps": [
     {

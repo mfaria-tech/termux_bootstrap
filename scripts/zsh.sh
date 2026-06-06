@@ -12,7 +12,7 @@ ZSH_CUSTOM_DIR="${ZSH_CUSTOM:-$OH_MY_ZSH_DIR/custom}"
 
 install_oh_my_zsh() {
   if [[ -d "$OH_MY_ZSH_DIR" ]]; then
-    log_success "Oh My Zsh ja instalado."
+    log_success "Oh My Zsh já instalado."
     return 0
   fi
 
@@ -61,15 +61,15 @@ configure_default_shell() {
   zsh_path="$(command -v zsh)"
 
   if [[ "${SHELL:-}" == "$zsh_path" ]]; then
-    log_success "ZSH ja e o shell atual."
+    log_success "ZSH já e o shell atual."
     return 0
   fi
 
   if command_exists chsh; then
-    log_info "Definindo ZSH como shell padrao."
-    chsh -s "$zsh_path" || log_warning "Nao foi possivel alterar o shell automaticamente."
+    log_info "Definindo ZSH como shell padrão."
+    chsh -s "$zsh_path" || log_warning "Não foi possível alterar o shell automaticamente."
   else
-    log_warning "chsh nao encontrado. Abra o ZSH executando: zsh"
+    log_warning "chsh não encontrado. Abra o ZSH executando: zsh"
   fi
 }
 

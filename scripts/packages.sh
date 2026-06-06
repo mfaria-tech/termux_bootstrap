@@ -13,7 +13,7 @@ install_packages_from_file() {
   local packages_file="$1"
   local package
 
-  [[ -f "$packages_file" ]] || die "Arquivo de pacotes nao encontrado: $packages_file"
+  [[ -f "$packages_file" ]] || die "Arquivo de pacotes não encontrado: $packages_file"
 
   while IFS= read -r package || [[ -n "$package" ]]; do
     package="${package%%#*}"

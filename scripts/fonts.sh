@@ -41,9 +41,9 @@ install_fira_code_font() {
 reload_termux_settings() {
   if command_exists termux-reload-settings; then
     termux-reload-settings
-    log_success "Configuracoes visuais do Termux recarregadas."
+    log_success "Configurações visuais do Termux recarregadas."
   else
-    log_warning "termux-reload-settings nao encontrado. Reinicie o Termux para aplicar a fonte."
+    log_warning "termux-reload-settings não encontrado. Reinicie o Termux para aplicar a fonte."
   fi
 }
 
