@@ -119,11 +119,9 @@ pda_get_ip() {
   local ip_addr=""
   if pda_cmd ip; then
     ip_addr="$(ip -o -4 addr show scope global 2>/dev/null | awk '{split($4,a,"/"); print a[1]; exit}')"
-  elif pda_cmd ifconfig; then
-    ip_addr="$(
-      ifconfig 2>/dev/null |
-      awk '/inet / && $2 != "127.0.0.1" { print $2; exit }'
-    )"
+  fi
+  if pda_cmd ifconfig; then
+    ip_addr="$(ifconfig 2>/dev/null | awk '/inet / && $2 != "127.0.0.1" { print $2; exit }')"
   fi
   [[ -n "$ip_addr" ]] && printf "%s" "$ip_addr" || printf "offline"
 }
