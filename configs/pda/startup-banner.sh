@@ -328,9 +328,9 @@ print_system_info() {
   pda_box_line "${PDA_ICON_NODE:-🟢} Node:" "${PDA_WHITE}$(pda_get_node)${PDA_RESET}"
   print_storage
   #print_battery
-  pda_box_line "${PDA_ICON_MOON:-🌙} Moon:" "${PDA_WHITE}$(pda_moon_phase)${PDA_RESET}"
-  pda_box_line "${PDA_ICON_TASK:-☑️} Tasks:" "${PDA_WHITE}$(pda_pending_tasks) pending${PDA_RESET}"
-  pda_box_line "${PDA_ICON_POMO:-🍅} Pomodoros:" "${PDA_WHITE}$(pda_pomodoros_today) today${PDA_RESET}"
+  #pda_box_line "${PDA_ICON_MOON:-🌙} Moon:" "${PDA_WHITE}$(pda_moon_phase)${PDA_RESET}"
+  #pda_box_line "${PDA_ICON_TASK:-☑️} Tasks:" "${PDA_WHITE}$(pda_pending_tasks) pending${PDA_RESET}"
+  #pda_box_line "${PDA_ICON_POMO:-🍅} Pomodoros:" "${PDA_WHITE}$(pda_pomodoros_today) today${PDA_RESET}"
   weather="$(pda_weather_widget)"
   [[ -n "$weather" ]] && pda_box_line "Weather:" "${PDA_WHITE}$weather${PDA_RESET}"
 }
