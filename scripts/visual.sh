@@ -13,7 +13,7 @@ main() {
   log_info "Aplicando configurações visuais."
   bash "$BOOTSTRAP_DIR/scripts/zsh.sh"
   bash "$BOOTSTRAP_DIR/scripts/nvim.sh"
-  bash "$BOOTSTRAP_DIR/scripts/fonts.sh"
+  #bash "$BOOTSTRAP_DIR/scripts/fonts.sh"
 
   log_success "Customizações visuais aplicadas."
 }
