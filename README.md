@@ -183,30 +183,3 @@ Defina a variável antes de confirmar a etapa PDA:
 ```bash
 export PDA_REPO_URL="https://github.com/seu-usuario/seu-repositorio-pda.git"
 ```
-
-### Clipboard no Neovim
-
-O suporte a clipboard no Termux pode exigir pacotes adicionais ou integração com o app Termux:API, dependendo do dispositivo.
-
-## Roadmap
-
-- Perfil de instalação mínimo, padrão e completo.
-- Backup automático antes de sobrescrever configurações.
-- Suporte a dry-run.
-- Instalação opcional de linguagens extras.
-- Validação JSON mais detalhada para `apps/apps.json`.
-- Testes automatizados com ShellCheck e bats.
-
-## Publicação no GitHub
-
-Antes de publicar:
-
-```bash
-chmod +x install.sh scripts/*.sh
-shellcheck install.sh scripts/*.sh
-git init
-git add .
-git commit -m "Initial termux bootstrap"
-```
-
-O projeto está organizado para ser usado diretamente como repositório GitHub.
