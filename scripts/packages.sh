@@ -9,10 +9,10 @@ source "$BOOTSTRAP_DIR/scripts/utils.sh"
 
 get_packages_file() {
     case "$(get_environment)" in
-        termux)
+        "$ENV_TERMUX")
             echo "$BOOTSTRAP_DIR/packages.conf"
             ;;
-        debian)
+        "$ENV_DEBIAN")
             echo "$BOOTSTRAP_DIR/packages_debian.conf"
             ;;
         *)
