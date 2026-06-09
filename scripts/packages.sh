@@ -7,7 +7,21 @@ BOOTSTRAP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 # shellcheck source=scripts/utils.sh
 source "$BOOTSTRAP_DIR/scripts/utils.sh"
 
-PACKAGES_FILE="$BOOTSTRAP_DIR/packages.conf"
+get_packages_file() {
+    case "$(environment_name)" in
+        termux)
+            echo "$BOOTSTRAP_DIR/packages.conf"
+            ;;
+        debian)
+            echo "$BOOTSTRAP_DIR/packages_debian.conf"
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+PACKAGES_FILE="$(get_packages_file)"
 
 install_packages_from_file() {
   local packages_file="$1"

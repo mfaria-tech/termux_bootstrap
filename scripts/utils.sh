@@ -12,6 +12,10 @@ readonly COLOR_SUCCESS="\033[1;32m"
 readonly COLOR_WARNING="\033[1;33m"
 readonly COLOR_ERROR="\033[1;31m"
 
+readonly ENV_TERMUX="termux"
+readonly ENV_DEBIAN="debian"
+readonly ENV_UNKNOWN="unknown"
+
 log_info() {
   printf "%b[INFO]%b %s\n" "$COLOR_INFO" "$COLOR_RESET" "$*"
 }
@@ -37,12 +41,57 @@ command_exists() {
   command -v "$1" >/dev/null 2>&1
 }
 
+is_termux() {
+  [[ -n "${PREFIX:-}" && "${PREFIX:-}" == *"com.termux"* ]]
+}
+
+is_debian() {
+  [[ -f "/etc/debian_version" ]]
+}
+
+is_proot() {
+  [[ -n "${PROOT_TMP_DIR:-}" ]] || grep -qi proot /proc/self/status 2>/dev/null
+}
+
+get_environment() {
+  if is_termux; then
+    printf "%s" "$ENV_TERMUX"
+  elif is_debian; then
+    printf "%s" "$ENV_DEBIAN"
+  else
+    printf "%s" "$ENV_UNKNOWN"
+  fi
+}
+
+require_environment() {
+  local env
+  env="$(get_environment)"
+
+  case "$env" in
+    "$ENV_TERMUX")
+      command_exists pkg || die "Comando 'pkg' não encontrado."
+      ;;
+    "$ENV_DEBIAN")
+      command_exists apt || die "Comando 'apt' não encontrado."
+      ;;
+    *)
+      log_warning "Ambiente não reconhecido."
+      ;;
+  esac
+}
+
 require_termux() {
-  if [[ -z "${PREFIX:-}" || "${PREFIX:-}" != *"com.termux"* ]]; then
-    log_warning "Este instalador foi projetado para Termux. Continuando mesmo assim."
+  # if [[ -z "${PREFIX:-}" || "${PREFIX:-}" != *"com.termux"* ]]; then
+  #   log_warning "Este instalador foi projetado para Termux. Continuando mesmo assim."
+  # fi
+
+  # command_exists pkg || die "Comando 'pkg' não encontrado. Execute dentro do Termux."
+
+  if ! is_termux; then
+    log_warning "Executando fora do Termux."
   fi
 
-  command_exists pkg || die "Comando 'pkg' não encontrado. Execute dentro do Termux."
+  require_environment
 }
 
 ask_yes_no() {
@@ -90,7 +139,19 @@ install_package() {
   fi
 
   log_info "Instalando pacote: $package"
-  pkg install -y "$package"
+
+  case "$(get_environment)" in
+    "$ENV_TERMUX")
+      pkg install -y "$package"
+      ;;
+    "$ENV_DEBIAN")
+      apt install -y "$package"
+      ;;
+    *)
+      die "Gerenciador de pacotes não suportados."
+      ;;
+  esac
+
   log_success "Pacote instalado: $package"
 }
 
