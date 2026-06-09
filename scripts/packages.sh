@@ -8,7 +8,7 @@ BOOTSTRAP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 source "$BOOTSTRAP_DIR/scripts/utils.sh"
 
 get_packages_file() {
-    case "$(environment_name)" in
+    case "$(get_environment)" in
         termux)
             echo "$BOOTSTRAP_DIR/packages.conf"
             ;;
